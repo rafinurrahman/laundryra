@@ -16,7 +16,7 @@ class CreatePaketsTable extends Migration
         Schema::create('paket', function (Blueprint $table) {
             $table->id();
             $table->integer("id_outlet")->nullable();
-            $table->enum("jelas",['kiloan','selimut','bed_cover','kaos','lain']);
+            $table->enum("jenis",['kiloan','selimut','bed_cover','kaos','lain']);
             $table->string("nama_paket",100);
             $table->string("harga");
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreatePaketsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pakets');
+        Schema::dropIfExists('paket');
     }
 }

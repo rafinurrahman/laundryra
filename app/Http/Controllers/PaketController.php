@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\paket;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorepaketRequest;
 use App\Http\Requests\UpdatepaketRequest;
 
@@ -15,7 +16,8 @@ class PaketController extends Controller
      */
     public function index()
     {
-        //
+        $paket = Paket::all();
+        return view('paket.index', compact('paket'));
     }
 
     /**
@@ -34,9 +36,12 @@ class PaketController extends Controller
      * @param  \App\Http\Requests\StorepaketRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorepaketRequest $request)
+    public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        Paket::create($data);
+        return redirect('paket');
     }
 
     /**
@@ -70,7 +75,8 @@ class PaketController extends Controller
      */
     public function update(UpdatepaketRequest $request, paket $paket)
     {
-        //
+        Paket::findOrFail($request->id)->update($request->all());
+        return back();
     }
 
     /**
@@ -81,6 +87,9 @@ class PaketController extends Controller
      */
     public function destroy(paket $paket)
     {
-        //
+        Paket::destroy($paket->id);
+
+
+        return redirect('/paket');
     }
 }
